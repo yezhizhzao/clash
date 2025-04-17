@@ -1,0 +1,2 @@
+#YT shorts
+URL-REGEX,^https?://([a-zA-Z0-9-]+\.)*youtube\.com/shorts/,REJECT
