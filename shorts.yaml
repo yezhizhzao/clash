@@ -1,24 +1,13 @@
-rules:
-  # 基础白名单（保障基础服务）
-  - DOMAIN-SUFFIX,youtube.com,Proxy
-  - DOMAIN-SUFFIX,googlevideo.com,Proxy
-  - DOMAIN-SUFFIX,googleapis.com,Proxy
-  - DOMAIN-SUFFIX,google.com,Proxy
+# ========================
+# YouTube Shorts 屏蔽规则
+# ========================
+DOMAIN-SUFFIX,shorts.youtube.com,拒绝
+DOMAIN-SUFFIX,youtu.be,拒绝
+PATH-KEYWORD,/shorts/,拒绝
+PATH-KEYWORD,/watch?v=*&feature=shorts,拒绝
+PATH-KEYWORD,/results?sp=EgIQAg,拒绝
 
-  # 核心屏蔽规则（精准拦截 Shorts）
-  - DOMAIN-KEYWORD,shorts.youtube.com,Direct
-  - PATH-REGEXP,/shorts/\d+/?[\?&].*,Direct
-  - PATH-REGEXP,/watch\?v=[^&]+&feature=shorts,Direct
-  - PATH-REGEXP,/results\?search_query=.*&sp=EgIQAg.*,Direct
-
-  # 防御性规则（防止协议绕过）
-  - DOMAIN-KEYWORD,youtu.be,Proxy  # 允许短链跳转
-  - DOMAIN-KEYWORD,youtube-nocookie.com,Proxy
-
-  # 服务保障规则（关键API放行）
-  - DOMAIN-SUFFIX,accounts.google.com,Proxy
-  - DOMAIN-SUFFIX,apis.google.com,Proxy
-  - DOMAIN-SUFFIX,clients2.google.com,Proxy
-
-  # 默认规则
-  - MATCH,Proxy
+# 防御性规则（防止绕过）
+PATH-REGEXP,/get_video_info\?.*sp=EgIQAg.*,拒绝
+PATH-REGEXP,/next_chunk\?.*type=shorts.*,拒绝
+PATH-REGEXP,/videoplayback.*type=shorts.*,拒绝
